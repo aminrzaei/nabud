@@ -2,7 +2,7 @@
   "name": "nabud",
   "version": "0.1.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom --root src/",
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "pinia": "^2.0.23",
-    "vue": "^3.2.41",
-    "vue-router": "^4.1.5"
+    "three": "^0.146.0",
+    "vue": "^3.2.41"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

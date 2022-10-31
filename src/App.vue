@@ -1,18 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import renderEnv from "./utils/renderEnv";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  const nabudLocalStorag = window.localStorage.getItem("nabud");
+  if (nabudLocalStorag) {
+    alert("LS hast");
+  } else {
+    alert("Ls Nist");
+  }
+  renderEnv().run();
+});
 </script>
 
 <template>
-  <header>
-    <div>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div id="env"></div>
 </template>
 
 <style scoped></style>
