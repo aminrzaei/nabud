@@ -1,20 +1,9 @@
 <script setup>
-import renderEnv from "./utils/renderEnv";
-import { onMounted } from "vue";
-
-onMounted(() => {
-  const nabudLocalStorag = window.localStorage.getItem("nabud");
-  if (nabudLocalStorag) {
-    alert("LS hast");
-  } else {
-    alert("Ls Nist");
-  }
-  renderEnv().run();
-});
+import HomeView from "./views/HomeView.vue";
 </script>
 
 <template>
-  <div id="env"></div>
+  <HomeView />
 </template>
 
 <style scoped></style>
