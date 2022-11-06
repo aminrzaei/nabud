@@ -4,16 +4,15 @@ import InfoModal from "../components/InfoModal.vue";
 import AboutModal from "../components/AboutModal.vue";
 
 import renderEnv from "../utils/renderEnv";
+import useServiceStore from "../stores/service";
 import { onMounted } from "vue";
 
 onMounted(() => {
-  // const nabudLocalStorag = window.localStorage.getItem("nabud");
-  // if (nabudLocalStorag) {
-  //   alert("LS hast");
-  // } else {
-  //   alert("Ls Nist");
-  // }
-  renderEnv().run();
+  const serviceStore = useServiceStore();
+  const { serviceEndDate } = serviceStore;
+  if (serviceEndDate) {
+    renderEnv().run(serviceEndDate);
+  }
 });
 </script>
 

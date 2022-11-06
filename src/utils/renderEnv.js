@@ -6,7 +6,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 let camera, controls, scene, renderer;
 
 const renderEnv = () => {
-  const _init = () => {
+  const init = (serviceEndDate) => {
+    console.log(serviceEndDate);
     const evnContainer = document.getElementById("env");
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcccccc);
@@ -133,6 +134,7 @@ const renderEnv = () => {
     scene.add(ambientLight);
 
     window.addEventListener("resize", _onWindowResize);
+    _run();
   };
 
   const _onWindowResize = () => {
@@ -144,14 +146,13 @@ const renderEnv = () => {
   const _render = () => {
     renderer.render(scene, camera);
   };
-  _init();
-  const run = () => {
-    requestAnimationFrame(run);
+  const _run = () => {
+    requestAnimationFrame(_run);
     controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
     _render();
     scene.rotation.y += 0.002;
   };
-  return { run };
+  return { init };
 };
 
 export default renderEnv;

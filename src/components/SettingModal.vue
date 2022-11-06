@@ -1,7 +1,15 @@
 <script setup>
 import { ref } from "vue";
+import useServiceStore from "../stores/service";
 
-const open = ref(false);
+const serviceStore = useServiceStore();
+const { serviceEndDate } = serviceStore;
+let shouldModalOpenOnInit = true;
+if (serviceEndDate) {
+  shouldModalOpenOnInit = false;
+}
+
+const open = ref(shouldModalOpenOnInit);
 </script>
 
 <template>
