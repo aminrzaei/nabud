@@ -5,7 +5,7 @@ const useServiceStore = defineStore("counter", () => {
   const serviceEndDate = ref(window.localStorage.getItem("nabud"));
   const setServiceEndDate = function (date) {
     window.localStorage.setItem("nabud", JSON.stringify(date));
-    serviceEndDate.value = date;
+    serviceEndDate.value = JSON.stringify(date);
   };
 
   return { serviceEndDate, setServiceEndDate };

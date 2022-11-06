@@ -11,6 +11,7 @@ const open = ref(false);
     <div v-if="open" @click="open = false" class="overlay">
       <div v-if="open" class="modal">
         Infoooooo
+
         <button @click.stop="open = false">Close</button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import ServiceForm from "../components/ServiceForm.vue";
 import useServiceStore from "../stores/service";
 
 const serviceStore = useServiceStore();
@@ -10,6 +11,7 @@ if (serviceEndDate) {
 }
 
 const open = ref(shouldModalOpenOnInit);
+const closeModal = () => (open.value = false);
 </script>
 
 <template>
@@ -17,8 +19,9 @@ const open = ref(shouldModalOpenOnInit);
 
   <Teleport to="#app">
     <div v-if="open" @click="open = false" class="overlay">
-      <div v-if="open" class="modal">
+      <div v-if="open" @click.stop="" class="modal">
         Setting
+        <ServiceForm @closeModal="closeModal" />
         <button @click.stop="open = false">Close</button>
       </div>
     </div>

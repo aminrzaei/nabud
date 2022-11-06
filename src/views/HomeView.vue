@@ -6,12 +6,12 @@ import AboutModal from "../components/AboutModal.vue";
 import renderEnv from "../utils/renderEnv";
 import useServiceStore from "../stores/service";
 import { onMounted } from "vue";
+const serviceStore = useServiceStore();
+const { serviceEndDate } = serviceStore;
 
 onMounted(() => {
-  const serviceStore = useServiceStore();
-  const { serviceEndDate } = serviceStore;
   if (serviceEndDate) {
-    renderEnv().run(serviceEndDate);
+    renderEnv().init(serviceEndDate);
   }
 });
 </script>
