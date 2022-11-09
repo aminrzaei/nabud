@@ -1,14 +1,12 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 
-const useServiceStore = defineStore("counter", () => {
-  const serviceEndDate = ref(window.localStorage.getItem("nabud"));
-  const setServiceEndDate = function (date) {
-    window.localStorage.setItem("nabud", JSON.stringify(date));
-    serviceEndDate.value = JSON.stringify(date);
+const useServiceStore = defineStore("service", () => {
+  const serviceDates = ref(window.localStorage.getItem("nabud"));
+  const setServiceDates = function (dates) {
+    window.localStorage.setItem("nabud", JSON.stringify(dates));
   };
-
-  return { serviceEndDate, setServiceEndDate };
+  return { serviceDates, setServiceDates };
 });
 
 export default useServiceStore;

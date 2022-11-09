@@ -4,9 +4,9 @@ import ServiceForm from "../components/ServiceForm.vue";
 import useServiceStore from "../stores/service";
 
 const serviceStore = useServiceStore();
-const { serviceEndDate } = serviceStore;
+const { serviceDates } = serviceStore;
 let shouldModalOpenOnInit = true;
-if (serviceEndDate) {
+if (serviceDates) {
   shouldModalOpenOnInit = false;
 }
 

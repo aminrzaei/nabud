@@ -6,8 +6,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 let camera, controls, scene, renderer;
 
 const renderEnv = () => {
-  const init = (serviceEndDate) => {
-    console.log(serviceEndDate);
+  const init = (durations) => {
+    console.log(durations);
     const evnContainer = document.getElementById("env");
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcccccc);
