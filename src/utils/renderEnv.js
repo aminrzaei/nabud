@@ -1,8 +1,9 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-
 let camera, controls, scene, renderer;
 
 const renderEnv = () => {
@@ -11,7 +12,7 @@ const renderEnv = () => {
     const evnContainer = document.getElementById("env");
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcccccc);
-
+    THREE.Cache.enabled = true;
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -26,9 +27,9 @@ const renderEnv = () => {
       1000
     );
 
-    camera.position.x = -10.5;
-    camera.position.y = 15;
-    camera.position.z = 11;
+    camera.position.x = -10;
+    camera.position.y = 16;
+    camera.position.z = 22;
 
     var geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
     var material = new THREE.MeshPhongMaterial({
@@ -58,6 +59,42 @@ const renderEnv = () => {
     controls.maxDistance = 25;
 
     controls.maxPolarAngle = Math.PI / 2;
+
+    /// text
+
+    const fontLoader = new FontLoader();
+    fontLoader.load(
+      // resource URL
+      "kalameh.json",
+
+      // onLoad callback
+      function (font) {
+        const textGeo = new TextGeometry(`زور ${durations.remain} دﻮﺒﻧ`, {
+          font: font,
+          size: 2,
+          height: 0.01,
+          curveSegments: 12,
+          bevelThickness: 0.2,
+          bevelSize: 0.1,
+          bevelEnabled: true,
+        });
+        textGeo.computeBoundingBox();
+        var textMaterial = new THREE.MeshPhongMaterial({
+          color: 0x000000,
+          specular: 0xffffff,
+          shininess: 0.5,
+          metalness: 0.8,
+        });
+        const textMesh1 = new THREE.Mesh(textGeo, textMaterial);
+
+        textMesh1.position.x = -6;
+        textMesh1.position.y = 0.8;
+        textMesh1.position.z = 7;
+        textMesh1.rotation.x = -Math.PI / 2;
+        textMesh1.castShadow = true;
+        scene.add(textMesh1);
+      }
+    );
 
     const loader = new GLTFLoader();
     loader.load(
@@ -92,7 +129,7 @@ const renderEnv = () => {
         // Set the models initial scale
         // theModel.scale.multiplyScalar(1);
         theModel.position.y = 0.5;
-        theModel.position.z = 3;
+        theModel.position.z = -4;
         theModel.rotation.x = Math.PI / 2;
         scene.add(theModel);
       },
@@ -150,7 +187,7 @@ const renderEnv = () => {
     requestAnimationFrame(_run);
     controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
     _render();
-    scene.rotation.y += 0.002;
+    scene.rotation.y += 0.001;
   };
   return { init };
 };
