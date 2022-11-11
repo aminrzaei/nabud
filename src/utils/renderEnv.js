@@ -8,7 +8,6 @@ let camera, controls, scene, renderer;
 
 const renderEnv = () => {
   const init = (durations) => {
-    console.log(durations);
     const evnContainer = document.getElementById("env");
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcccccc);
@@ -56,7 +55,7 @@ const renderEnv = () => {
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.05;
     controls.screenSpacePanning = false;
-    controls.maxDistance = 25;
+    controls.maxDistance = 40;
 
     controls.maxPolarAngle = Math.PI / 2;
 
@@ -116,7 +115,7 @@ const renderEnv = () => {
         textMesh1.rotation.x = -Math.PI / 2;
         textMesh1.castShadow = true;
 
-        textMesh2.position.x = 9;
+        textMesh2.position.x = 10;
         textMesh2.position.y = 0.8;
         textMesh2.position.z = -8;
         textMesh2.rotation.x = -Math.PI / 2;
@@ -137,32 +136,11 @@ const renderEnv = () => {
           if (o.isMesh) {
             o.castShadow = true;
             o.receiveShadow = true;
+            o.position.y = 1;
           }
         });
         // Set the models initial scale
-        theModel.scale.multiplyScalar(0.01);
-        scene.add(theModel);
-      },
-      undefined,
-      function (error) {
-        console.error(error);
-      }
-    );
-    loader.load(
-      "/ak47.glb",
-      function (gltf) {
-        const theModel = gltf.scene;
-        theModel.traverse((o) => {
-          if (o.isMesh) {
-            o.castShadow = true;
-            o.receiveShadow = true;
-          }
-        });
-        // Set the models initial scale
-        // theModel.scale.multiplyScalar(1);
-        theModel.position.y = 0.5;
-        theModel.position.z = -4;
-        theModel.rotation.x = Math.PI / 2;
+        theModel.scale.multiplyScalar(2.5);
         scene.add(theModel);
       },
       undefined,
