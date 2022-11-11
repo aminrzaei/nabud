@@ -173,8 +173,8 @@ const renderEnv = () => {
     dirLight2.shadow.camera.top = shadowCameraRange;
     dirLight2.shadow.camera.bottom = -shadowCameraRange;
 
-    const light = new THREE.PointLight(0xffffff, 8, 12, 1.2);
-    light.position.set(2, 10, 20);
+    const light = new THREE.PointLight(0xffffff, 8, 15, 1.2);
+    light.position.set(-10, 12, 20);
     scene.add(light);
 
     const ambientLight = new THREE.AmbientLight(0xffffff);
