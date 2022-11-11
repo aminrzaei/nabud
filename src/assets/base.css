@@ -1,6 +1,7 @@
 *,
 *::before,
 *::after {
+  font-family: kalameh;
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
@@ -11,4 +12,8 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100%;
+}
+@font-face {
+  font-family: kalameh;
+  src: url("/font/Kalameh-Regular.woff2");
 }

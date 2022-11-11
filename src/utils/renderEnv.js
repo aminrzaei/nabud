@@ -69,30 +69,62 @@ const renderEnv = () => {
 
       // onLoad callback
       function (font) {
-        const textGeo = new TextGeometry(`زور ${durations.remain} دﻮﺒﻧ`, {
-          font: font,
-          size: 2,
-          height: 0.01,
-          curveSegments: 12,
-          bevelThickness: 0.2,
-          bevelSize: 0.1,
-          bevelEnabled: true,
-        });
-        textGeo.computeBoundingBox();
-        var textMaterial = new THREE.MeshPhongMaterial({
-          color: 0x000000,
-          specular: 0xffffff,
+        const textGeo1 = new TextGeometry(
+          `(${durations.remainPercentage}%) زور ${durations.remain} دﻮﺒﻧ`,
+          {
+            font: font,
+            size: 1.5,
+            height: 0.01,
+            curveSegments: 12,
+            bevelThickness: 0.2,
+            bevelSize: 0.1,
+            bevelEnabled: true,
+          }
+        );
+        const textGeo2 = new TextGeometry(
+          `(${durations.spentPercentage}%) ﻪﺘﺷﺬﮔ زور  ${durations.spent}`,
+          {
+            font: font,
+            size: 1.5,
+            height: 0.01,
+            curveSegments: 12,
+            bevelThickness: 0.2,
+            bevelSize: 0.1,
+            bevelEnabled: true,
+          }
+        );
+        textGeo1.computeBoundingBox();
+        textGeo2.computeBoundingBox();
+        var textMaterial1 = new THREE.MeshPhongMaterial({
+          color: 0x3d3d3d,
+          specular: 0x0d9139,
           shininess: 0.5,
           metalness: 0.8,
         });
-        const textMesh1 = new THREE.Mesh(textGeo, textMaterial);
+        var textMaterial2 = new THREE.MeshPhongMaterial({
+          color: 0x3d3d3d,
+          specular: 0xc2422f,
+          shininess: 0.5,
+          metalness: 0.8,
+        });
+        const textMesh1 = new THREE.Mesh(textGeo1, textMaterial1);
+        const textMesh2 = new THREE.Mesh(textGeo2, textMaterial2);
 
-        textMesh1.position.x = -6;
+        textMesh1.position.x = -7.5;
         textMesh1.position.y = 0.8;
         textMesh1.position.z = 7;
         textMesh1.rotation.x = -Math.PI / 2;
         textMesh1.castShadow = true;
+
+        textMesh2.position.x = 9;
+        textMesh2.position.y = 0.8;
+        textMesh2.position.z = -8;
+        textMesh2.rotation.x = -Math.PI / 2;
+        textMesh2.rotation.z = Math.PI;
+
+        textMesh2.castShadow = true;
         scene.add(textMesh1);
+        scene.add(textMesh2);
       }
     );
 

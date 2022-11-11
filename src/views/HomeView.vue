@@ -1,63 +1,51 @@
 <script setup>
+import { onMounted } from "vue";
 import SettingModal from "../components/SettingModal.vue";
-import InfoModal from "../components/InfoModal.vue";
-import AboutModal from "../components/AboutModal.vue";
-
 import renderEnv from "../utils/renderEnv";
 import useServiceStore from "../stores/service";
-import { onMounted } from "vue";
+import timeCalculator from "../utils/timeCalculator";
 
-import { gregorianToJalali } from "../utils/dateConvertor";
-import Duration from "../utils/duration";
+import GithubIcon from "../assets/icons/github.svg";
 
 const serviceStore = useServiceStore();
 const { serviceDates } = serviceStore;
 
-const calculateRemain = (dates) => {
-  const { start: startDate, end: endDate } = JSON.parse(dates);
-  const now = new Date();
-  const nowYear = now.getFullYear();
-  const nowMonth = now.getMonth() + 1;
-  const nowDay = now.getDate();
-
-  const [persianNowYear, persianNowMonth, persianNowDay] = gregorianToJalali(
-    nowYear,
-    nowMonth,
-    nowDay
-  );
-  const nowDate = {
-    year: persianNowYear,
-    month: persianNowMonth,
-    day: persianNowDay,
-  };
-  const tillNowDuration = new Duration(startDate);
-  const spetDays = tillNowDuration.diff(nowDate);
-
-  const totalDuration = new Duration(startDate);
-  const totalDays = totalDuration.diff(endDate);
-
-  const remainDays = totalDays - spetDays;
-  const percentage = Math.floor((spetDays / totalDays) * 100);
-  return { spent: spetDays, total: totalDays, remain: remainDays, percentage };
-};
-
 onMounted(() => {
   if (serviceDates) {
-    const durations = calculateRemain(serviceDates);
-    renderEnv().init(durations);
+    const calculatedTimes = timeCalculator(serviceDates);
+    renderEnv().init(calculatedTimes);
   }
 });
 </script>
 
 <template>
   <SettingModal />
-  <InfoModal />
-  <AboutModal />
+  <div class="githublink">
+    <a target="_blank" href="https://github.com/aminrzaei">
+      <img alt="Github (aminrzaei)" title="Github" :src="GithubIcon" />
+    </a>
+  </div>
   <div id="env" />
 </template>
 
 <style>
 #env {
   position: absolute;
+}
+.githublink {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  z-index: 2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.githublink:hover {
+  transform: scale(1.2);
+}
+img {
+  height: 25px;
 }
 </style>
